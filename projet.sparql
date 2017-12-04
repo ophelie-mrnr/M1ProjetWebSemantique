@@ -2,18 +2,16 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 PREFIX iuf: <http://ex.org/iuf/>
 
-PREFIX mfmf: <http://ex.org/mfmf/>
-
 PREFIX dbo: <http://dbpedia.org/ontology/>
 PREFIX geo: <https://www.w3.org/2003/01/geo/>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
 
 
 CONSTRUCT {
   
 ?URI a foaf:Person;
   	
-	xsd:gYear ?annee;
+	dbo:year ?annee;
     
 	foaf:lastName ?nom;
     
@@ -25,19 +23,19 @@ CONSTRUCT {
     
 	foaf:gender ?sexe;
        
-	mfmf:section_cnu ?section_cnu;
+	iuf:section_cnu ?section_cnu;
       
-	mfmf:groupe_cnu ?groupe_cnu;
+	iuf:groupe_cnu ?groupe_cnu;
        
-	mfmf:secteur_disciplinaire ?secteur_disciplinaire;
+	iuf:secteur_disciplinaire ?secteur_disciplinaire;
 
-	mfmf:groupe_de_corps ?groupe_de_corps;
+	iuf:groupe_de_corps ?groupe_de_corps;
  
 	iuf:numero_national_de_structure_de_recherche ?numero_national_de_structure_de_recherche;
     
 	iuf:unite_de_recherche ?unite_de_recherche;
  
-	mfmf:academie ?academie;
+	iuf:academie ?academie;
        
 	dbo:region ?region;
       
@@ -49,8 +47,7 @@ CONSTRUCT {
 	geo:long ?longitude;
 	iuf:discipline_nomenclature ?discipline_nomenclature;
     
-	dbo:EducationalInstitution ?etablissement;    
-
+	dbo:EducationalInstitution ?etablissement. 
 } 
 
 FROM <file:fr-esr-iuf-les-membres.csv> 
@@ -62,3 +59,4 @@ WHERE {
 }
 
 
+-
