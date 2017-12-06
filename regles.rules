@@ -1,0 +1,44 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix dbo:  <http://dbpedia.org/ontology/> .
+@prefix geo:  <https://www.w3.org/2003/01/geo/> .
+@prefix iuf:  <http://ex.org/iuf/> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+
+[(?x ?a ?y) -> (?x rdf:type rdfs:Ressource)]
+[(?x ?a ?y) -> (?y rdf:type rdfs:Ressource)]
+[(?a rdfs:domain ?x) (?y ?a ?z) -> (?y rdf:type ?x)]
+[(?a rdfs:range ?x) (?y ?a ?z) -> (?z rdf:type ?x)]
+[(?x rdfs:subPropertyOf ?y) (?y rdfs:subPropertyOf ?z) -> (?x rdfs:subPropertyOf ?z)]
+[(?x rdf:type rdf:Property) -> (?x rdfs:subPropertyOf ?x)]
+[(?a rdfs:subPropertyOf ?b) (?x ?a ?y) -> (?x ?b ?y)]
+[(?x rdf:type rdfs:Class) -> (?x rdfs:subClassOf rdfs:Ressource)]
+[(?x rdfs:subClassOf ?y) (?z rdf:type ?x) -> (?z rdf:type ?y)]
+[(?x rdf:type rdfs:Class) -> (?x rdfs:subClassOf ?x)]
+[(?x rdfs:subClassOf ?y) (?y rdfs:subClassOf ?z) -> (?x rdfs:subClassOf ?z)]
+[(?x ?a rdfs:Datatype) -> (?x rdfs:subClassOf rdfs:Litteral)]
+
+# si region est une sous classe de PopulatedPlace et que PopulatedPlace est une sous classe de place, alors region est une sous classe de place.
+[(dbo:region rdfs:subClassOf dbo:PopulatedPlace) (dbo:PopulatedPlace rdfs:subClassOf dbo:place) -> ( dbo:region rdfs:subClassOf dbo:place) ]
+# si l'URI est une region, alors l'URI est une place
+[(?uri dbo:region ?region) -> (?uri dbo:place ?region) ]
+
+# si EducationalInstitution est une sous classe de Organisation et que Organisation est une sous classe de Agent, alors EducationalInstitution est une sous classe de Agent
+[(dbo:EducationalInstitution rdfs:subClassOf dbo:Organisation) ( dbo:Organisation rdfs:subClassOf dbo:Agent)  -> ( dbo:EducationalInstitution rdfs:subClassOf dbo:Agent) ]
+# si l'URI est une educationalInstitution, alors l'URI est un agent
+[(?uri dbo:EducationalInstitution ?educationalInstitution) -> (?uri dbo:Agent ?educationalInstitution) ]
+
+# si section_cnu est de type propriété alors elle peut aussi être une sous propriété d'elle-même
+[(iuf:section_cnu rdf:type rdf:Property) -> (iuf:section_cnu rdfs:subPropertyOf iuf:section_cnu)]
+# si groupe_cnu est de type propriété alors il peut aussi être une sous propriété de lui-même
+[(iuf:groupe_cnu rdf:type rdf:Property) -> (iuf:groupe_cnu rdfs:subPropertyOf iuf:groupe_cnu)]
+# si secteur_disciplinaire est de type propriété alors il peut aussi être une sous propriété de lui-même
+[(iuf:secteur_disciplinaire rdf:type rdf:Property) -> (iuf:secteur_disciplinaire rdfs:subPropertyOf iuf:secteur_disciplinaire)]
+
+# si section_cnu est une sous propriété de groupe_cnu et que groupe_cnu est une sous propriété de secteur_disciplinaire, alors EducationalInstitution est une sous classe de Agent
+[(iuf:section_cnu rdfs:subPropertyOf iuf:groupe_cnu ) ( iuf:groupe_cnu rdfs:subPropertyOf iuf:secteur_disciplinaire )-> ( iuf:section_cnu rdfs:subPropertyOf iuf:secteur_disciplinaire ) ]
+# si l'URI est une section_cnu, alors l'URI est un secteur_disciplinaire
+[(?uri iuf:section_cnu ?section_cnu) -> (?uri iuf:secteur_disciplinaire ?section_cnu) ]
+# si l'URI est une section_cnu, alors l'URI est un groupe_cnu
+[(?uri iuf:section_cnu ?section_cnu) -> (?uri iuf:groupe_cnu ?section_cnu) ]
