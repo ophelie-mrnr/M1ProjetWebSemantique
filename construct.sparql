@@ -1,0 +1,66 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+PREFIX iuf: <http://ex.org/iuf/>
+
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX geo: <https://www.w3.org/2003/01/geo/>
+
+
+
+CONSTRUCT {
+  
+?URIMember a iuf:Membre;
+
+	foaf:lastName ?nom;
+
+	foaf:givenName ?prenom;
+
+	foaf:gender ?sexe;
+
+	dbo:year ?annee;
+
+	iuf:categorie_iuf ?categorie_iuf;
+
+	iuf:reconduction_iuf ?reconduction_iuf;
+  
+	iuf:groupe_de_corps ?groupe_de_corps;
+
+	iuf:numero_national_de_structure_de_recherche ?numero_national_de_structure_de_recherche;
+
+	iuf:unite_de_recherche ?unite_de_recherche;
+
+	iuf:inDiscipline ?URIDiscipline;
+	iuf:isInOrganisation ?URIEtab.
+
+?URIEtab a iuf:Organisation;
+	geo:lat ?latitude;
+	geo:long ?longitude;
+	iuf:academie ?academie;
+       
+	dbo:region ?region;
+
+	dbo:EducationalInstitution ?etablissement;
+	iuf:pres ?pres;
+        
+	iuf:idex ?idex.
+   
+
+?URIDiscipline a iuf:Discipline;
+	iuf:secteur_disciplinaire ?secteur_disciplinaire;
+
+	iuf:groupe_cnu ?groupe_cnu;
+
+	iuf:section_cnu ?section_cnu.
+} 
+
+
+FROM <file:fr-esr-iuf-les-membres.csv> 
+
+
+WHERE {
+
+	BIND (URI(CONCAT('http://iuf.org/Member/', ?nom, '_', ?prenom)) AS ?URIMember)
+	BIND (URI(CONCAT('http://iuf.org/Etablissement/', ?etablissement)) AS ?URIEtab)
+
+	BIND (URI(CONCAT('http://iuf.org/Discipline/', ?discipline_nomenclature)) AS ?URIDiscipline)
+}
