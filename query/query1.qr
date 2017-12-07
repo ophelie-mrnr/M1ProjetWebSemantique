@@ -1,0 +1,19 @@
+PREFIX iuf: <http://ex.org/iuf/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?etablissement (COUNT(DISTINCT ?z) AS ?countGlobal) (COUNT(DISTINCT ?z1) AS ?countHomme)(COUNT(DISTINCT ?z2) AS ?countFemme) 
+WHERE { 
+		?a iuf:isInOrganisation ?b .
+  		?b dbo:EducationalInstitution ?etablissement.
+		?a <http://xmlns.com/foaf/0.1/gender> ?z .
+		{
+			?a <http://xmlns.com/foaf/0.1/gender> ?z1 .
+			FILTER REGEX(?z1, "Hommes") 
+		} 
+		UNION { 
+		?a <http://xmlns.com/foaf/0.1/gender> ?z2 .
+		FILTER REGEX(?z2, "Femmes")
+		}
+	} 
+	GROUP BY ?etablissement
+	ORDER BY DESC (?countGlobal)
