@@ -1,0 +1,101 @@
+@prefix dbo:  <http://dbpedia.org/ontology/> .
+@prefix geo:  <https://www.w3.org/2003/01/geo/> .
+@prefix iuf:  <http://ex.org/iuf/> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#>
+@prefix fjmlf:  <http://enseignants-titulaires.org/fjmlf/#> .
+
+# ----- Membre
+
+iuf:Membre a owl:Class;
+			owl:sameAs foaf:Person . 
+
+foaf:lastName a owl:DatatypeProperty;
+			rdfs:domain iuf:Membre;
+			rdfs:range  rdfs:Literal .
+			
+foaf:givenName a owl:DatatypeProperty;
+			rdfs:domain iuf:Membre;
+			rdfs:range  rdfs:Literal .
+			
+iuf:categorie_iuf a owl:DatatypeProperty;
+			rdfs:domain iuf:Membre;
+			rdfs:range rdfs:Literal . 
+			
+iuf:reconduction_iuf a owl:DatatypeProperty;
+			rdfs:domain iuf:Membre; 
+			rdfs:range rdfs:Literal . 
+			
+foaf:gender a owl:DatatypeProperty, owl:FunctionalProperty ;
+			rdfs:domain iuf:Membre;
+			rdfs:range rdfs:Literal . 
+
+iuf:groupe_de_corps a owl:DatatypeProperty ;
+			rdfs:domain iuf:Membre;
+			rdfs:range rdfs:Literal . 
+			
+iuf:isInOrganisation a owl:ObjectProperty ;
+			rdfs:domain iuf:Membre;
+			rdfs:range iuf:Organisation . 
+			
+iuf:InDiscipline a owl:ObjectProperty ;
+			rdfs:domain iuf:Membre;
+			rdfs:range iuf:Discipline . 
+			
+# -----  Discipline
+
+iuf:Discipline a owl:Class;
+			owl:sameAs vaem:Discipline . 
+
+iuf:section_cnu a owl:DatatypeProperty;
+			rdfs:domain iuf:Discipline;
+			rdfs:range rdfs:Literal;
+			owl:sameAs fjmlf:section_cnu . 
+			
+iuf:groupe_cnu a owl:DatatypeProperty;
+			rdfs:domain iuf:Discipline;
+			rdfs:range rdfs:Literal;
+			owl:sameAs fjmlf:groupe_cnu . 
+			
+iuf:secteur_disciplinaire a owl:DatatypeProperty;
+			rdfs:domain iuf:Discipline;
+			rdfs:range rdfs:Literal;
+			owl:sameAs fjmlf:secteur_disciplinaire .  
+			
+# ----- Organisation
+
+			
+iuf:Organisation a owl:Class;
+			owl:sameAs dbo:Organisation . 
+
+iuf:academie a owl:DatatypeProperty;
+			rdfs:domain iuf:Organisation;
+			rdfs:range rdfs:Literal . 
+			
+dbo:region a owl:DatatypeProperty;
+			rdfs:domain iuf:Organisation;
+			rdfs:range rdfs:Literal .
+			
+iuf:pres a owl:DatatypeProperty;
+			rdfs:domain iuf:Organisation;
+			rdfs:range rdfs:Literal .
+
+iuf:idex a owl:DatatypeProperty;
+			rdfs:domain iuf:Organisation;
+			rdfs:range rdfs:Literal .	
+			
+geo:lat a owl:DatatypeProperty;
+			rdfs:domain iuf:Organisation;
+			rdfs:range rdfs:xsd:double .
+
+geo:long a owl:DatatypeProperty;
+			rdfs:domain iuf:Organisation;
+			rdfs:range rdfs:xsd:double .
+			
+dbo:EducationalInstitution  a owl:DatatypeProperty;
+			rdfs:domain iuf:Organisation;
+			rdfs:range rdfs:Literal .
+
+			  
