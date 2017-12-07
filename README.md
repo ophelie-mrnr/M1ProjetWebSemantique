@@ -6,8 +6,6 @@ Lien vers notre dataset : https://data.enseignementsup-recherche.gouv.fr/explore
 
 Lien vers notre diapo sur les étapes 1 et 2 : https://docs.google.com/presentation/d/1ehNt6D2tqKm3xai6eZf34D9DGsb2APxbvMveqaOPRBs/edit#slide=id.g29a4258442_0_102
 
-Notre rapport se trouve à l'adresse suivante : https://docs.google.com/document/d/1M0AfYiqk38y6BP57pDovOIi6oK1JMC5VOXpC9uAfbmg/edit#
-
 Le dossier <b>construct</b> contient le fichier : contruct.sparql qui nous a permis d'obtenir nos différents fichiers aux formats RDFXML (constructRDFXML.rdf) et Turtle (constructTurtle.ttl)
 
 Le dossier <b>query</b> comporte les différentes requêtes ainsi que leurs résultats. 
