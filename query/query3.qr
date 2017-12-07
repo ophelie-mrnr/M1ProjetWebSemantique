@@ -1,0 +1,19 @@
+PREFIX iuf: <http://ex.org/iuf/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT DISTINCT ?name ?cnu ?annee ?groupe_corps 
+WHERE { 
+   ?person iuf:isInOrganisation ?b ;
+  	 foaf:lastName ?ln ;
+  	 foaf:givenName ?gn .
+  BIND(CONCAT(?ln, " ", ?gn)AS ?name) .
+  	?person dbo:year ?annee .
+  	?b dbo:EducationalInstitution ?etablissement.
+	?person iuf:inDiscipline ?c .
+	?c iuf:groupe_cnu ?cnu.
+  	FILTER REGEX(?cnu, "Physique")
+  OPTIONAL{
+  	?person iuf:groupe_de_corps ?groupe_corps
+  }
+} ORDER BY (?annee)
