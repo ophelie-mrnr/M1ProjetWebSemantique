@@ -1,0 +1,38 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+
+
+:ourDataSet         a                        void:Dataset;
+                    dcterms:title            "Membres de l'Institution Universitaire de France";
+                    dcterms:description      "Ce jeu de données présente les différents membres de l'Institution Universitaire de France.";
+                    foaf:homepage            <https://github.com/ophelie-mrnr/M1ProjetWebSemantique>;
+                    dcterms:contributor      :Univ_Nantes;
+                    dcterms:publisher        :BRASSIER_Maelle;
+                    dcterms:publisher        :MARINIER_Ophelie;
+					dcterms:publisher        :LARDY_Florian;
+                    dcterms:license          <https://www.etalab.gouv.fr/licence-ouverte-open-licence>;
+                    void:feature             <http://www.w3.org/ns/formats/Turtle>;
+                    void:triples             47659.
+
+:Univ_Nantes        a                        foaf:Organization;
+                    rdfs:label               "Université de Nantes";
+                    foaf:homepage            <http://www.univ-nantes.fr>.
+
+:BRASSIER_Maelle    a                        foaf:Person;
+                    rdfs:label               "BRASSIER Maëlle";
+                    foaf:mbox                <maelle.brassier@etu.univ-nantes.fr>.
+
+:MARINIER_Ophelie   a                        foaf:Person;
+                    rdfs:label               "MARINIER Ophélie";
+                    foaf:mbox                <ophelie.marinier@etu.univ-nantes.fr>.
+
+:LARDY_Florian	    a                        foaf:Person;
+                    rdfs:label               "LARDY Florian";
+                    foaf:mbox                <florian.lardy@etu.univ-nantes.fr>.	
+					
+:ourDataSet			a                        void:Linkset ;
+                    void:target              enseignants_titulaires;
+                    void:linkedPredicate     owl:sameAs.
