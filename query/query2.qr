@@ -1,0 +1,19 @@
+PREFIX iuf: <http://ex.org/iuf/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?annee (COUNT(?total) AS ?countotal) (COUNT(?senior) AS ?countsenior) (COUNT(?junior) AS ?countjunior) (?countsenior*100/?countotal as ?pourcentage_senior)
+WHERE { 
+   ?a iuf:isInOrganisation ?b .
+  	?b dbo:EducationalInstitution ?etablissement.
+	?a dbo:year ?annee .
+	?a iuf:categorie_iuf ?total.
+	{
+	?a iuf:categorie_iuf ?senior.
+		FILTER REGEX(?senior, "Senior")}
+UNION { 
+		?a iuf:categorie_iuf ?junior.
+		FILTER REGEX(?junior, "Junior")
+		}
+	}
+GROUP BY ?annee 
+ORDER BY ?annee
